@@ -80,6 +80,7 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
   .brand-mark{object-fit:contain;filter:brightness(0) opacity(.75)}.site-footer .brand-mark{filter:brightness(0) invert(1)}
     #booking{max-width:28rem;margin:auto;display:grid;gap:1rem;text-align:left}#booking label{display:grid;gap:.4rem;font-weight:600}#booking input{width:100%;padding:.85rem;border:1px solid #987f74;border-radius:.5rem;font:inherit;background:white;color:#302827}#booking small{text-align:center}
+  .gallery-placeholder{position:relative;overflow:hidden}.gallery-placeholder img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   </style>
   <!-- SEO LOCAL: confirmar horário, canais e URL antes de publicar. -->
   <script type="application/ld+json">
@@ -93,7 +94,7 @@
     <nav class="nav container" aria-label="Navegação principal">
       <a class="brand" href="#inicio" aria-label="Fabíola Donza Estética Avançada, início"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a>
       <div id="nav-links" class="nav-links">
-        <a href="#sobre">A clínica</a><a href="#tratamentos">Tratamentos</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
+        <a href="#sobre">A clínica</a><a href="#tratamentos">Tratamentos</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#galeria">Galeria</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
         <a class="btn btn-gold mobile-book" href="#agendar" style="display:none">Agendar avaliação</a>
       </div>
       <a class="btn btn-gold header-btn" href="#agendar">Agendar avaliação <span aria-hidden="true">↗</span></a>
@@ -154,6 +155,10 @@
       <article class="review-card reveal"><span class="stars" aria-label="5 estrelas">★★★★★</span><blockquote>“Eu amo os cuidados da Fabíola, me sinto ainda mais linda quando vou lá, autoestima elevadíssima.”</blockquote><cite>Bianca Mendonca</cite></article>
     </div><p class="review-more">★★★★★ &nbsp; 5,0 no Google · 54 avaliações* &nbsp; | &nbsp; “Ótimo espaço e muita gentileza no atendimento”.</p></div></section>
     
+    <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid reveal">
+      <!-- FOTOS: troque cada div por <img src="fotos/recepcao.jpg" alt="Recepção da clínica Fabíola Donza" loading="lazy">. -->
+      <div class="gallery-placeholder"><span>Recepção</span><img src="images/recepcao.jpg" alt="Recepção" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><span>Sala de atendimento</span><img src="images/sala-de-atendimento.jpg" alt="Sala de atendimento" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><span>Detalhes do espaço</span><img src="images/detalhes.jpg" alt="Detalhes do espaço" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><span>Ambiente da clínica</span><img src="images/ambiente.jpg" alt="Ambiente da clínica" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><span>Equipe</span><img src="images/equipe.jpg" alt="Equipe" loading="lazy" onerror="this.hidden=true"></div>
+    </div></div></section>
     <section class="section faq" id="duvidas" aria-labelledby="duvidas-title"><div class="container faq-layout"><div class="reveal"><p class="eyebrow">Perguntas frequentes</p><h2 id="duvidas-title">Tudo começa com uma boa conversa.</h2><p class="lead">Tire dúvidas sobre a experiência na clínica e fale com a equipe para informações específicas sobre cada procedimento.</p><a class="btn btn-outline js-whatsapp" href="#agendar">Falar no WhatsApp <span aria-hidden="true">↗</span></a></div><div class="faq-list reveal">
       <details><summary>Preciso fazer uma avaliação antes do tratamento?</summary><p>A avaliação ajuda a compreender suas expectativas e verificar quais opções podem ser adequadas. Consulte a equipe sobre o formato da avaliação para o procedimento desejado.</p></details>
       <details><summary>Quais tratamentos faciais e corporais estão disponíveis?</summary><p>A disponibilidade pode variar. Entre em contato pelo WhatsApp para receber a lista atualizada, orientações e informações sobre cada opção.</p></details>
