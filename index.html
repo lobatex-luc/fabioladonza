@@ -92,7 +92,8 @@
       header .brand-mark { width: 2.5em; height: 2.5em; }
     }
       .photo-placeholder .about-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-      .photo-placeholder .about-monogram { position: absolute; left: 16px; bottom: 16px; width: 150px; max-width: 40%; height: auto; filter: brightness(0) invert(1); }
+      .photo-placeholder::before { content: ""; position: absolute; left: 16px; bottom: 16px; width: 150px; max-width: 40%; aspect-ratio: 1; border-radius: 50%; background: #382920; z-index: 1; }
+    .photo-placeholder .about-monogram { position: absolute; left: 16px; bottom: 16px; z-index: 2; width: 150px; max-width: 40%; height: auto; box-sizing: border-box; border-radius: 50%; background: transparent; filter: brightness(0) invert(1); }
   </style>
   <!-- SEO LOCAL: confirmar horário, canais e URL antes de publicar. -->
   <script type="application/ld+json">
