@@ -45,6 +45,7 @@
     .hero{background:linear-gradient(120deg,#fbf7f3 0%,#f7ece8 55%,#efe2dd 100%);overflow:hidden}.hero-grid{min-height:650px;display:grid;grid-template-columns:1.13fr .87fr;align-items:center;gap:40px;padding:65px 0 85px}
     .hero h1 em{font-weight:400;color:#986D64}.hero p.lead{max-width:570px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}.trust{display:flex;align-items:center;gap:10px;margin-top:30px;font-size:.87rem;color:#5c514f}.stars{color:#987340;letter-spacing:.08em;white-space:nowrap}
     .hero-art{position:relative;min-height:535px;display:grid;place-items:center}.art-ring{width:min(100%,430px);aspect-ratio:4/5;border-radius:220px 220px 22px 22px;background:radial-gradient(circle at 35% 28%,#fff8f1 0,#e7cfc6 40%,#b78e87 100%);box-shadow:var(--shadow);position:relative;overflow:hidden}
+    .hero-photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
     .art-ring:before{content:'';position:absolute;inset:8%;border:1px solid #ffffffa8;border-radius:190px 190px 14px 14px}
     .art-ornament{position:absolute;left:10%;top:13%;font:italic 8rem 'Playfair Display',serif;color:#fff9;transform:rotate(-18deg)}
     .art-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#6d4c46;padding:50px}
@@ -119,7 +120,7 @@
           <div class="hero-actions"><a class="btn btn-gold" href="#agendar">Agendar minha avaliação <span class="arrow" aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#tratamentos">Conheça os tratamentos</a></div>
           <div class="trust"><span class="stars" aria-label="5 de 5 estrelas">★★★★★</span><span><strong>Nota 5,0 no Google</strong> · 54 avaliações*</span></div>
         </div>
-        <div class="hero-art reveal" aria-label="Identidade visual da clínica; substitua por uma fotografia autorizada se desejar"><div class="art-ring"><div class="art-ornament" aria-hidden="true">✦</div><div class="art-inner"><img class="monogram-logo" src="images/Monograma.png" alt="Monograma FD da Fabíola Donza Estética Avançada" width="128" height="128" decoding="async"><span>Fabíola Donza</span><small>Estética Avançada</small></div></div><div class="art-caption">Um momento só seu<small>Cuidado em cada detalhe</small></div></div>
+        <div class="hero-art reveal"><div class="art-ring"><img class="hero-photo" src="images/arco_principal.webp" alt="Fabíola Donza" fetchpriority="high"></div><div class="art-caption">Um momento só seu<small>Cuidado em cada detalhe</small></div></div>
       </div>
     </section>
     <section class="section" id="sobre" aria-labelledby="sobre-title">
