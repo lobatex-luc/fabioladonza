@@ -325,10 +325,30 @@
     viewport.classList.toggle('has-neighbor', hasNeighbor);
     controls.hidden = !hasNeighbor;
   }
-  function move(direction) {
+  const moves = [];
+  let sliding = false;
+  async function move(direction) {
     if (group.children.length < 2) return;
-    if (direction > 0) group.append(group.firstElementChild);
-    else group.prepend(group.lastElementChild);
+    moves.push(direction);
+    if (sliding) return;
+    sliding = true;
+    while (moves.length) {
+      const forward = moves.shift() > 0;
+      const first = group.firstElementChild;
+      const step = group.children[1].offsetLeft - first.offsetLeft;
+      if (!forward) group.prepend(group.lastElementChild);
+      if (group.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const positions = [0, -step];
+        if (!forward) positions.reverse();
+        const animation = group.animate(
+          positions.map(x => ({ transform: 'translateX(' + x + 'px)' })),
+          { duration: 380, easing: 'cubic-bezier(.25,.8,.25,1)' }
+        );
+        await animation.finished.catch(() => {});
+      }
+      if (forward && first.parentNode === group) group.append(first);
+    }
+    sliding = false;
   }
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
