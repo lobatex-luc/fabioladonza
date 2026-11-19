@@ -100,6 +100,23 @@
   {"@context":"https://schema.org","@type":"BeautySalon","name":"Fabíola Donza Estética Avançada","description":"Clínica de estética avançada com atendimentos faciais e corporais em Ananindeua, PA.","telephone":"+55 91 98254-6847","address":{"@type":"PostalAddress","streetAddress":"Travessa WE Vinte e Seis, 162","addressLocality":"Ananindeua","addressRegion":"PA","postalCode":"67133-090","addressCountry":"BR"},"areaServed":"Ananindeua, PA","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"54","bestRating":"5"}}
   </script>
   <link rel="icon" href="images/Monograma.png">
+<style>
+.results-window { overflow-x: auto; }
+.results-track, .results-group { display: flex; width: max-content; }
+.results-group { gap: 16px; padding-right: 16px; }
+.results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 4 / 3; }
+.results-group [hidden], .results-toggle[hidden] { display: none; }
+.results-toggle { display: block; margin: 16px auto 0; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 8px 16px; color: inherit; cursor: pointer; }
+@keyframes results-slide { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: no-preference) {
+ .results-window.is-ready { overflow: hidden; }
+ .is-ready .results-track { animation: results-slide 70s linear infinite; }
+ .is-ready.is-paused .results-track { animation-play-state: paused; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .results-group[aria-hidden], .results-toggle { display: none; }
+}
+</style>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -167,28 +184,33 @@
           <h2 id="resultados-title">Nossos resultados</h2>
           <p>Quer conhecer resultados de um tratamento específico? Converse com a equipe da clínica.</p>
         </div>
-        <div class="gallery-grid">
+        <div class="results-window">
+          <div class="results-track">
+            <div class="results-group">
           <div class="gallery-placeholder">
             <span>Resultado 1</span>
-            <img src="images/resultado-1.jpg" alt="Resultado 1 da clínica" loading="lazy" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado-1.jpg" alt="Resultado 1 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 2</span>
-            <img src="images/resultado-2.jpg" alt="Resultado 2 da clínica" loading="lazy" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado-2.jpg" alt="Resultado 2 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 3</span>
-            <img src="images/resultado-3.jpg" alt="Resultado 3 da clínica" loading="lazy" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado-3.jpg" alt="Resultado 3 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 4</span>
-            <img src="images/resultado-4.jpg" alt="Resultado 4 da clínica" loading="lazy" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado-4.jpg" alt="Resultado 4 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 5</span>
-            <img src="images/resultado-5.jpg" alt="Resultado 5 da clínica" loading="lazy" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado-5.jpg" alt="Resultado 5 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+          </div>
+            </div>
           </div>
         </div>
+        <button class="results-toggle" type="button" hidden>Pausar carrossel</button>
 
       </div>
     </section>
@@ -291,5 +313,21 @@
       animated.forEach(el => observer.observe(el));
     } else { animated.forEach(el => el.classList.add('visible')); }
   </script>
+<script>
+(() => {
+  const viewport = document.querySelector('.results-window');
+  const group = viewport.querySelector('.results-group');
+  const copy = group.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  group.after(copy);
+  viewport.classList.add('is-ready');
+  const button = viewport.nextElementSibling;
+  button.hidden = false;
+  button.addEventListener('click', () => {
+    const paused = viewport.classList.toggle('is-paused');
+    button.textContent = paused ? 'Continuar carrossel' : 'Pausar carrossel';
+  });
+})();
+</script>
 </body>
 </html>
