@@ -101,7 +101,7 @@
   </script>
   <link rel="icon" href="images/Monograma.png">
 <style>
-.results-window { overflow-x: auto; }
+.results-window { overflow: hidden; touch-action: pan-y pinch-zoom; }
 .results-track, .results-group { display: flex; width: max-content; }
 .results-group { gap: 16px; }
 .results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 4 / 3; }
@@ -109,7 +109,7 @@
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
 .results-controls button:disabled { opacity: .45; cursor: default; }
-@media (prefers-reduced-motion: no-preference) { .results-window { scroll-behavior: smooth; } }
+
 </style>
 </head>
 <body>
@@ -317,19 +317,29 @@
   const controls = viewport.nextElementSibling;
   const [previous, next] = controls.querySelectorAll('button');
   function updateControls() {
-    const end = viewport.scrollWidth - viewport.clientWidth;
-    controls.hidden = end <= 1;
-    previous.disabled = viewport.scrollLeft <= 1;
-    next.disabled = viewport.scrollLeft >= end - 1;
+    controls.hidden = group.children.length < 2;
   }
   function move(direction) {
-    const step = group.firstElementChild.offsetWidth + parseFloat(getComputedStyle(group).columnGap);
-    viewport.scrollBy({ left: direction * step });
+    if (group.children.length < 2) return;
+    if (direction > 0) group.append(group.firstElementChild);
+    else group.prepend(group.lastElementChild);
   }
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
-  viewport.addEventListener('scroll', updateControls, { passive: true });
-  window.addEventListener('resize', updateControls);
+  let touchStart;
+  viewport.addEventListener('pointerdown', event => {
+    if (event.isPrimary && event.pointerType === 'touch') {
+      touchStart = { x: event.clientX, y: event.clientY };
+    }
+  });
+  viewport.addEventListener('pointercancel', () => { touchStart = null; });
+  viewport.addEventListener('pointerup', event => {
+    if (!touchStart || !event.isPrimary) return;
+    const dx = event.clientX - touchStart.x;
+    const dy = event.clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
+  });
   updateControls();
   // Discover the numbered photos, including uploads with gaps in the numbering.
   const treeUrl = 'https://api.github.com/repos/lobatex-luc/fabioladonza/git/trees/';
