@@ -107,7 +107,7 @@
 .results-track { position: relative; left: 50%; transform: translateX(calc(0px - var(--half-card))); }
 .results-window.has-neighbor .results-track { transform: translateX(calc(0px - var(--half-card) - var(--half-card) - var(--half-card) - var(--gap))); }
 .results-group { gap: var(--gap); }
-.results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 4 / 3; }
+.results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 3 / 4; }
 .results-group [hidden], .results-controls[hidden] { display: none; }
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
@@ -209,23 +209,23 @@
             <div class="results-group">
           <div class="gallery-placeholder">
             <span>Resultado 1</span>
-            <img src="images/resultado-1.jpg" alt="Resultado 1 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado_1.jpg" alt="Resultado 1 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 2</span>
-            <img src="images/resultado-2.jpg" alt="Resultado 2 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado_2.jpg" alt="Resultado 2 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 3</span>
-            <img src="images/resultado-3.jpg" alt="Resultado 3 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado_3.jpg" alt="Resultado 3 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 4</span>
-            <img src="images/resultado-4.jpg" alt="Resultado 4 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado_4.jpg" alt="Resultado 4 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
           <div class="gallery-placeholder">
             <span>Resultado 5</span>
-            <img src="images/resultado-5.jpg" alt="Resultado 5 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
+            <img src="images/resultado_5.jpg" alt="Resultado 5 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
           </div>
             </div>
           </div>
@@ -401,7 +401,7 @@
     const root = await readTree('main');
     const folder = root.find(entry => entry.type === 'tree' && entry.path === 'images');
     const entries = await readTree(folder.sha);
-    const pattern = /^resultado-(\d+)\.(?:jpe?g|png|webp|avif)$/i;
+    const pattern = /^resultado[_-](\d+)\.(?:jpe?g|png|webp|avif)$/i;
     const photos = entries.filter(entry => entry.type === 'blob' && pattern.test(entry.path))
       .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', {numeric: true}));
     if (photos.length) {
