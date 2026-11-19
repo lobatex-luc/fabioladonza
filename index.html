@@ -103,7 +103,10 @@
 <style>
 .results-window { overflow: hidden; touch-action: pan-y pinch-zoom; }
 .results-track, .results-group { display: flex; width: max-content; }
-.results-group { gap: 16px; }
+.results-window { --half-card: clamp(120px, 15vw, 210px); --gap: 16px; }
+.results-track { position: relative; left: 50%; transform: translateX(calc(0px - var(--half-card))); }
+.results-window.has-neighbor .results-track { transform: translateX(calc(0px - var(--half-card) - var(--half-card) - var(--half-card) - var(--gap))); }
+.results-group { gap: var(--gap); }
 .results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 4 / 3; }
 .results-group [hidden], .results-controls[hidden] { display: none; }
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
@@ -316,8 +319,11 @@
   const group = viewport.querySelector('.results-group');
   const controls = viewport.nextElementSibling;
   const [previous, next] = controls.querySelectorAll('button');
-  function updateControls() {
-    controls.hidden = group.children.length < 2;
+  function prepareGallery() {
+    const hasNeighbor = group.children.length > 1;
+    if (hasNeighbor) group.prepend(group.lastElementChild);
+    viewport.classList.toggle('has-neighbor', hasNeighbor);
+    controls.hidden = !hasNeighbor;
   }
   function move(direction) {
     if (group.children.length < 2) return;
@@ -340,7 +346,7 @@
     touchStart = null;
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
   });
-  updateControls();
+  prepareGallery();
   // Discover the numbered photos, including uploads with gaps in the numbering.
   const treeUrl = 'https://api.github.com/repos/lobatex-luc/fabioladonza/git/trees/';
   async function readTree(ref) {
@@ -368,7 +374,7 @@
         return card;
       });
       group.replaceChildren(...cards);
-      updateControls();
+      prepareGallery();
     }
   } catch {
     // Keep the original gallery when GitHub is unavailable.
