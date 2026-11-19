@@ -110,7 +110,7 @@
 @keyframes results-slide { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 @media (prefers-reduced-motion: no-preference) {
  .results-window.is-ready { overflow: hidden; }
- .is-ready .results-track { animation: results-slide 70s linear infinite; }
+ .is-ready .results-track { animation: results-slide var(--results-duration, 70s) linear infinite; }
  .is-ready.is-paused .results-track { animation-play-state: paused; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -314,9 +314,42 @@
     } else { animated.forEach(el => el.classList.add('visible')); }
   </script>
 <script>
-(() => {
+(async () => {
   const viewport = document.querySelector('.results-window');
   const group = viewport.querySelector('.results-group');
+  // Discover the numbered photos, including uploads with gaps in the numbering.
+  const treeUrl = 'https://api.github.com/repos/lobatex-luc/fabioladonza/git/trees/';
+  async function readTree(ref) {
+    const response = await fetch(treeUrl + ref, { signal: AbortSignal.timeout(8000) });
+    if (!response.ok) throw new Error('Galeria indisponível');
+    return (await response.json()).tree;
+  }
+  try {
+    const root = await readTree('main');
+    const folder = root.find(entry => entry.type === 'tree' && entry.path === 'images');
+    const entries = await readTree(folder.sha);
+    const pattern = /^resultado-(\d+)\.(?:jpe?g|png|webp|avif)$/i;
+    const photos = entries.filter(entry => entry.type === 'blob' && pattern.test(entry.path))
+      .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', {numeric: true}));
+    if (photos.length) {
+      const template = group.firstElementChild;
+      const cards = photos.map(({path}) => {
+        const card = template.cloneNode(false);
+        const photo = new Image();
+        photo.alt = 'Resultado ' + path.match(pattern)[1] + ' da clínica';
+        photo.loading = 'lazy';
+        photo.decoding = 'async';
+        photo.src = 'images/' + encodeURIComponent(path);
+        card.append(photo);
+        return card;
+      });
+      group.replaceChildren(...cards);
+      viewport.style.setProperty('--results-duration', (cards.length * 14) + 's');
+      if (group.offsetWidth <= viewport.clientWidth) return;
+    }
+  } catch {
+    // Keep the original gallery when GitHub is unavailable.
+  }
   const copy = group.cloneNode(true);
   copy.setAttribute('aria-hidden', 'true');
   group.after(copy);
