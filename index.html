@@ -114,6 +114,19 @@
 .results-controls button:disabled { opacity: .45; cursor: default; }
 
 </style>
+<style>
+#galeria .gallery-grid { grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: auto auto auto; }
+#galeria .gallery-placeholder { grid-column: auto; min-width: 0; align-self: center; aspect-ratio: 16/10; }
+#galeria .gallery-placeholder:first-child,
+#galeria .gallery-placeholder:nth-child(6),
+#galeria .gallery-placeholder:last-child { aspect-ratio: 3/4; }
+#galeria .gallery-placeholder:first-child { grid-row: span 2; }
+@media (max-width: 760px) {
+  #galeria .gallery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-flow: row dense; }
+  #galeria .gallery-placeholder:nth-child(6),
+  #galeria .gallery-placeholder:last-child { grid-row: span 2; }
+}
+</style>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
@@ -160,7 +173,7 @@
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_5.png" alt="Espaço da clínica Fabíola Donza — foto 5" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
     </div></div></section>
