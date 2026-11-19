@@ -141,7 +141,7 @@
     </section>
     <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid reveal">
       <!-- FOTOS: troque cada div por <img src="fotos/recepcao.jpg" alt="Recepção da clínica Fabíola Donza" loading="lazy">. -->
-      <div class="gallery-placeholder"><video class="gallery-tour" src="images/tour_fabiola_donza%20(1).mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata"></video></div><div class="gallery-placeholder"><img src="images/Recepção.png" alt="Recepção" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Consultório_2.png" alt="Detalhes do espaço" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Espaço.png" alt="Ambiente da clínica" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Equipe.png" alt="Equipe" loading="lazy" onerror="this.hidden=true"></div>
+      <div class="gallery-placeholder"><video class="gallery-tour" src="images/tour_fabiola_donza%20(1).mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div><div class="gallery-placeholder"><img src="images/Recepção.png" alt="Recepção" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Consultório_2.png" alt="Detalhes do espaço" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Espaço.png" alt="Ambiente da clínica" loading="lazy" onerror="this.hidden=true"></div><div class="gallery-placeholder"><img src="images/Equipe.png" alt="Equipe" loading="lazy" onerror="this.hidden=true"></div>
     </div></div></section>
     <section class="section treatments" id="tratamentos" aria-labelledby="tratamentos-title">
       <div class="container"><div class="section-head reveal"><p class="eyebrow">Cuidados personalizados</p><h2 id="tratamentos-title">Tratamentos para cada momento de você.</h2><p>Explore opções faciais e corporais. A indicação depende de avaliação individual, disponibilidade e habilitação profissional.</p></div>
@@ -279,6 +279,10 @@
     window.addEventListener('resize', () => { if(window.innerWidth > 760) closeMenu(); });
 
     // Aparecimento suave; conteúdo permanece visível sem IntersectionObserver.
+    const tour = document.querySelector('.gallery-tour');
+    tour.muted = true;
+    tour.play().catch(() => { tour.controls = true; });
+
     const animated = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const observer = new IntersectionObserver(entries => entries.forEach(entry => {
