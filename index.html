@@ -115,17 +115,19 @@
 
 </style>
 <style>
-#galeria .gallery-grid { grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: auto auto auto; }
-#galeria .gallery-placeholder { grid-column: auto; min-width: 0; align-self: center; aspect-ratio: 16/10; }
-#galeria .gallery-portrait,
-#galeria .gallery-placeholder:first-child,
-#galeria .gallery-placeholder:nth-child(6),
-#galeria .gallery-placeholder:last-child { aspect-ratio: 3/4; }
-#galeria .gallery-placeholder:first-child { grid-row: span 2; }
-@media (max-width: 760px) {
-  #galeria .gallery-grid { grid-template-columns: repeat(2,minmax(0,1fr)); grid-auto-flow: row dense; }
-  #galeria .gallery-placeholder:nth-child(6),
-  #galeria .gallery-placeholder:last-child { grid-row: span 2; }
+#galeria .gallery-grid {
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  grid-template-rows: repeat(4,1fr);
+  grid-template-areas:
+    "tour sofa mirror"
+    "tour counter mirror"
+    "portrait room plant"
+    "portrait reception plant";
+}
+#galeria .gallery-placeholder { min-width: 0; min-height: 0; padding: 0; }
+#galeria .gallery-placeholder:is(:first-child,:nth-child(3),:nth-child(6),:last-child) {
+  width: 100%;
+  aspect-ratio: 3/4;
 }
 </style>
 </head>
@@ -169,14 +171,14 @@
     </section>
     <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid reveal">
       <!-- Galeria do espaço: tour em vídeo e sete fotografias da clínica. -->
-      <div class="gallery-placeholder"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder gallery-portrait"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: tour"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
+      <div class="gallery-placeholder" style="grid-area: sofa"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: mirror"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: counter"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: reception"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: portrait"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: room"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder" style="grid-area: plant"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
     </div></div></section>
     <section class="section treatments" id="tratamentos" aria-labelledby="tratamentos-title">
       <div class="container"><div class="section-head reveal"><p class="eyebrow">Cuidados personalizados</p><h2 id="tratamentos-title">Tratamentos para cada momento de você.</h2><p>Explore opções faciais e corporais. A indicação depende de avaliação individual, disponibilidade e habilitação profissional.</p></div>
