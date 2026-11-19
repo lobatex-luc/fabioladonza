@@ -117,6 +117,7 @@
 <style>
 #galeria .gallery-grid { grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: auto auto auto; }
 #galeria .gallery-placeholder { grid-column: auto; min-width: 0; align-self: center; aspect-ratio: 16/10; }
+#galeria .gallery-portrait,
 #galeria .gallery-placeholder:first-child,
 #galeria .gallery-placeholder:nth-child(6),
 #galeria .gallery-placeholder:last-child { aspect-ratio: 3/4; }
@@ -170,7 +171,7 @@
       <!-- Galeria do espaço: tour em vídeo e sete fotografias da clínica. -->
       <div class="gallery-placeholder"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
-      <div class="gallery-placeholder"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
+      <div class="gallery-placeholder gallery-portrait"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
       <div class="gallery-placeholder"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
