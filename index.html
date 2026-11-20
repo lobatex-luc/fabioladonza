@@ -106,10 +106,23 @@
 .results-window { --half-card: clamp(120px, 15vw, 210px); --gap: 16px; }
 .results-track { position: relative; left: 50%; transform: translateX(calc(0px - var(--half-card))); }
 .results-window.has-neighbor .results-track { transform: translateX(calc(0px - var(--half-card) - var(--half-card) - var(--half-card) - var(--gap))); }
-.results-group { gap: var(--gap); }
-.results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: var(--result-frame-ratio, 2 / 3); }
-#resultados .results-group img { object-fit: contain; object-position: center; background: #f7f1ed; }
-.results-group video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.results-window {
+  --fade: min(12%, 110px);
+  -webkit-mask-image: linear-gradient(to right, transparent, black var(--fade), black calc(100% - var(--fade)), transparent);
+  mask-image: linear-gradient(to right, transparent, black var(--fade), black calc(100% - var(--fade)), transparent);
+}
+.results-group { gap: var(--gap); align-items: center; }
+#resultados .results-group .gallery-placeholder {
+  width: clamp(240px, 30vw, 420px);
+  flex: none;
+  padding: 0;
+}
+#resultados .results-group :is(img, video) {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .results-group [hidden], .results-controls[hidden] { display: none; }
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
@@ -377,19 +390,8 @@
     syncVideo();
   }).observe(viewport);
   document.addEventListener('visibilitychange', syncVideo);
-  function fitResultFrames() {
-    const ratios = Array.from(group.querySelectorAll('img'), photo =>
-      photo.naturalWidth / photo.naturalHeight
-    ).filter(Number.isFinite).filter(ratio => ratio > 0);
-    if (!ratios.length) return;
-    // Balance the unused space for the narrowest and widest comparison photos.
-    const ratio = Math.sqrt(Math.min(...ratios) * Math.max(...ratios));
-    group.style.setProperty('--result-frame-ratio', ratio);
-  }
-  group.addEventListener('load', fitResultFrames, true);
   function prepareGallery() {
     group.querySelectorAll('img').forEach(photo => { photo.loading = 'eager'; });
-    fitResultFrames();
     const all = Array.from(group.children);
     const buckets = ['corporal', 'rosto', 'labios'].map(type => shuffle(all.filter(card => category(card) === type)));
     const ordered = [];
