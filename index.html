@@ -108,6 +108,7 @@
 .results-window.has-neighbor .results-track { transform: translateX(calc(0px - var(--half-card) - var(--half-card) - var(--half-card) - var(--gap))); }
 .results-group { gap: var(--gap); }
 .results-group .gallery-placeholder { width: clamp(240px, 30vw, 420px); aspect-ratio: 3 / 4; }
+.results-group video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
 .results-group [hidden], .results-controls[hidden] { display: none; }
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
@@ -126,9 +127,10 @@
   align-items: start;
 }
 #galeria .space-column { display: grid; gap: var(--space-gap); }
-#galeria .space-column:first-child { padding-top: 62%; }
+
 #galeria .gallery-placeholder { grid-area: auto; width: 100%; min-width: 0; padding: 0; aspect-ratio: 2 / 1; }
-#galeria .gallery-placeholder:nth-child(even) { aspect-ratio: 3 / 4; }
+#galeria .space-column:first-child .gallery-placeholder:is(:nth-child(3),:nth-child(5)),
+#galeria .space-column:last-child .gallery-placeholder:nth-child(even) { aspect-ratio: 3 / 4; }
 @media (max-width: 600px) {
   #galeria .gallery-grid { width: 100%; --space-gap: 9px; }
 }
@@ -174,6 +176,7 @@
     </section>
     <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid reveal">
       <div class="space-column">
+        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_8.png" alt="Ambiente da clínica Fabíola Donza" loading="lazy" decoding="async"></div>
         <div class="gallery-placeholder"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
         <div class="gallery-placeholder"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
         <div class="gallery-placeholder"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
@@ -184,6 +187,7 @@
         <div class="gallery-placeholder"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
         <div class="gallery-placeholder"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
         <div class="gallery-placeholder"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder"><img src="images/atendimento_espa%C3%A7o_9.png" alt="Atendimento na clínica Fabíola Donza" loading="lazy" decoding="async"></div>
       </div>
     </div></div></section>
     <section class="section treatments" id="tratamentos" aria-labelledby="tratamentos-title">
@@ -213,26 +217,18 @@
         <div class="results-window">
           <div class="results-track">
             <div class="results-group">
-          <div class="gallery-placeholder">
-            <span>Resultado 1</span>
-            <img src="images/resultado_1.jpg" alt="Resultado 1 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
-          </div>
-          <div class="gallery-placeholder">
-            <span>Resultado 2</span>
-            <img src="images/resultado_2.jpg" alt="Resultado 2 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
-          </div>
-          <div class="gallery-placeholder">
-            <span>Resultado 3</span>
-            <img src="images/resultado_3.jpg" alt="Resultado 3 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
-          </div>
-          <div class="gallery-placeholder">
-            <span>Resultado 4</span>
-            <img src="images/resultado_4.jpg" alt="Resultado 4 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
-          </div>
-          <div class="gallery-placeholder">
-            <span>Resultado 5</span>
-            <img src="images/resultado_5.jpg" alt="Resultado 5 da clínica" hidden onload="this.hidden=false; this.previousElementSibling.hidden=true">
-          </div>
+              <div class="gallery-placeholder"><video src="images/Resultado_1.MOV" aria-label="Resultado 1 da clínica" controls muted playsinline preload="metadata"></video></div>
+              <div class="gallery-placeholder"><img src="images/resultado_2.jpg" alt="Resultado 2 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_3.jpg" alt="Resultado 3 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_4.jpg" alt="Resultado 4 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_5.jpg" alt="Resultado 5 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_6.jpg" alt="Resultado 6 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_7.png" alt="Resultado 7 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_8.png" alt="Resultado 8 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_9.png" alt="Resultado 9 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_10.png" alt="Resultado 10 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_11.png" alt="Resultado 11 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/resultado_12.png" alt="Resultado 12 da clínica" loading="lazy" decoding="async"></div>
             </div>
           </div>
         </div>
@@ -407,15 +403,23 @@
     const root = await readTree('main');
     const folder = root.find(entry => entry.type === 'tree' && entry.path === 'images');
     const entries = await readTree(folder.sha);
-    const pattern = /^resultado[_-](\d+)\.(?:jpe?g|png|webp|avif)$/i;
+    const pattern = /^resultado[_-](\d+)\.(?:jpe?g|png|webp|avif|mov|mp4)$/i;
     const photos = entries.filter(entry => entry.type === 'blob' && pattern.test(entry.path))
       .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', {numeric: true}));
     if (photos.length) {
       const template = group.firstElementChild;
       const cards = photos.map(({path}) => {
         const card = template.cloneNode(false);
-        const photo = new Image();
-        photo.alt = 'Resultado ' + path.match(pattern)[1] + ' da clínica';
+        const isVideo = /\.(mov|mp4)$/i.test(path);
+        const photo = document.createElement(isVideo ? 'video' : 'img');
+        const label = 'Resultado ' + path.match(pattern)[1] + ' da clínica';
+        if (isVideo) {
+          photo.setAttribute('aria-label', label);
+          photo.controls = true;
+          photo.muted = true;
+          photo.playsInline = true;
+          photo.preload = 'metadata';
+        } else photo.alt = label;
         photo.loading = 'lazy';
         photo.decoding = 'async';
         photo.src = 'images/' + encodeURIComponent(path);
