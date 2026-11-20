@@ -230,6 +230,8 @@
               <div class="gallery-placeholder"><img src="images/resultado_10.png" alt="Resultado 10 da clínica" loading="lazy" decoding="async"></div>
               <div class="gallery-placeholder"><img src="images/resultado_11.png" alt="Resultado 11 da clínica" loading="lazy" decoding="async"></div>
               <div class="gallery-placeholder"><img src="images/resultado_12.png" alt="Resultado 12 da clínica" loading="lazy" decoding="async"></div>
+              <div class="gallery-placeholder"><img src="images/labios_1.jpeg" alt="Resultado de lábios 1" loading="lazy"></div>
+              <div class="gallery-placeholder"><img src="images/labios_2.jpeg" alt="Resultado de lábios 2" loading="lazy"></div>
             </div>
           </div>
         </div>
@@ -345,11 +347,49 @@
   const group = viewport.querySelector('.results-group');
   const controls = viewport.nextElementSibling;
   const [previous, next] = controls.querySelectorAll('button');
+  function category(card) {
+    const name = card.firstElementChild.getAttribute('src').split('/').pop().toLowerCase();
+    if (name.startsWith('labios')) return 'labios';
+    if (card.querySelector('video')) return 'video';
+    const number = Number(name.match(/\d+/)?.[0]);
+    return number >= 2 && number <= 6 ? 'corporal' : 'rosto';
+  }
+  function shuffle(cards) {
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+    return cards;
+  }
+  function syncVideo() {
+    const active = group.children[group.children.length > 1 ? 1 : 0];
+    for (const video of group.querySelectorAll('video')) {
+      if (active?.contains(video) && !document.hidden && inView) {
+        video.muted = true;
+        video.play().catch(() => {});
+      } else video.pause();
+    }
+  }
+  let inView = !('IntersectionObserver' in window);
+  if (!inView) new IntersectionObserver(([entry]) => {
+    inView = entry.isIntersecting;
+    syncVideo();
+  }).observe(viewport);
+  document.addEventListener('visibilitychange', syncVideo);
   function prepareGallery() {
+    const all = Array.from(group.children);
+    const buckets = ['corporal', 'rosto', 'labios'].map(type => shuffle(all.filter(card => category(card) === type)));
+    const ordered = [];
+    while (buckets.some(bucket => bucket.length)) {
+      for (const bucket of buckets) if (bucket.length) ordered.push(bucket.pop());
+    }
+    ordered.splice(3, 0, ...all.filter(card => category(card) === 'video'));
+    group.replaceChildren(...ordered);
     const hasNeighbor = group.children.length > 1;
     if (hasNeighbor) group.prepend(group.lastElementChild);
     viewport.classList.toggle('has-neighbor', hasNeighbor);
     controls.hidden = !hasNeighbor;
+    syncVideo();
   }
   const moves = [];
   let sliding = false;
@@ -375,6 +415,7 @@
       if (forward && first.parentNode === group) group.append(first);
     }
     sliding = false;
+    syncVideo();
   }
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
@@ -404,10 +445,11 @@
     const root = await readTree('main');
     const folder = root.find(entry => entry.type === 'tree' && entry.path === 'images');
     const entries = await readTree(folder.sha);
-    const pattern = /^resultado[_-](\d+)\.(?:jpe?g|png|webp|avif|mov|mp4)$/i;
+    const pattern = /^(?:resultado|labios)[_-](\d+)\.(?:jpe?g|png|webp|avif|mov|mp4)$/i;
     const photos = entries.filter(entry => entry.type === 'blob' && pattern.test(entry.path))
       .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', {numeric: true}));
-    if (photos.length) {
+    const existing = new Set(Array.from(group.children, card => card.firstElementChild.getAttribute("src")));
+    if (photos.length && (photos.length !== existing.size || photos.some(({path}) => !existing.has("images/" + encodeURIComponent(path))))) {
       const template = group.firstElementChild;
       const cards = photos.map(({path}) => {
         const card = template.cloneNode(false);
