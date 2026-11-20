@@ -123,6 +123,26 @@
   width: 100%;
   height: auto;
 }
+/* O resultado 8 reúne dois retratos lado a lado no mesmo arquivo quadrado. */
+#resultados .results-group .gallery-placeholder:has(> img[src="images/resultado_8.png"]) {
+  display: block;
+  aspect-ratio: 9 / 16;
+  --face-position: 21%;
+}
+#resultados .results-group img[src="images/resultado_8.png"] {
+  width: 200%;
+  max-width: none;
+  height: 50%;
+  object-fit: cover;
+  object-position: left var(--face-position);
+}
+#resultados .results-group .gallery-placeholder:has(> img[src="images/resultado_8.png"])::before {
+  content: "";
+  position: absolute;
+  inset: 50% 0 0;
+  background: url("images/resultado_8.png") right var(--face-position) / 200% auto no-repeat;
+  pointer-events: none;
+}
 .results-group [hidden], .results-controls[hidden] { display: none; }
 .results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
