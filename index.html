@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     /* ===== IDENTIDADE VISUAL: EDITE AS CORES AQUI ===== */
-    :root{--cream:#FAF5F1;--rose:#DCC0BC;--rose-light:#F1E5E1;--gold:#B18C5C;--ink:#302B2A;--muted:#695F5C;--white:#FFF;--line:#E8DBD5;--forest:#264D3B;--shadow:0 20px 65px rgba(69,45,41,.10);--radius:22px;--wrap:1160px}
+    :root{--cream:#FAF5F1;--rose:#DCC0BC;--rose-light:#F1E5E1;--gold:#B18C5C;--ink:#302B2A;--muted:#695F5C;--white:#FFF;--line:#E8DBD5;--forest:#264D3B;--shadow:0 20px 65px rgba(69,45,41,.10);--radius:22px;--wrap:1160px;--motion-ease:cubic-bezier(.25,.8,.25,1)}
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:94px}
     body{margin:0;color:var(--ink);background:var(--white);font-family:'DM Sans',Arial,sans-serif;font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
@@ -68,18 +68,114 @@
     /* GALERIA */
     .gallery-grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;grid-template-rows:repeat(3,210px);gap:14px}.gallery-placeholder{border-radius:19px;background:linear-gradient(145deg,#e9d9d3,#d7bcb4);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;position:relative;overflow:hidden;color:#654944;font-family:'Playfair Display',serif;font-size:1.2rem;border:1px solid #d9c2ba}.gallery-placeholder:after{content:'';position:absolute;inset:12px;border:1px solid #ffffff92;border-radius:12px;pointer-events:none}.gallery-placeholder:first-child{grid-row:span 2;background:linear-gradient(125deg,#e8d2cd,#c69f97)}.gallery-placeholder:nth-child(3){background:#f3e7e2}.gallery-placeholder:nth-child(4){background:#e9d5cc}.gallery-placeholder:nth-child(5){background:#e7dfd4}.gallery-placeholder span{position:relative;z-index:1}.gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:19px}
     /* FAQ */
-    .faq{background:var(--cream)}.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:65px;align-items:start}.faq-layout .lead{font-size:1rem}.faq-list{display:grid;gap:13px}.faq-list details{background:#fff;border:1px solid var(--line);border-radius:15px;padding:0 22px}.faq-list summary{padding:21px 30px 21px 0;cursor:pointer;font-weight:700;list-style:none;position:relative}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary:after{content:'+';position:absolute;right:0;top:18px;font-size:1.5rem;font-weight:400;color:#8A6853}.faq-list details[open] summary:after{content:'−'}.faq-list details p{font-size:.91rem;color:var(--muted);padding-bottom:22px;margin:0}
+    .faq{background:var(--cream)}.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:65px;align-items:start}.faq-layout .lead{font-size:1rem}.faq-list{display:grid;gap:13px}.faq-list details{background:#fff;border:1px solid var(--line);border-radius:15px;padding:0 22px}.faq-list summary{padding:21px 30px 21px 0;cursor:pointer;font-weight:700;list-style:none;position:relative}.faq-list summary::-webkit-details-marker{display:none}
+    .faq-list summary::before, .faq-list summary::after {
+      content: "";
+      position: absolute;
+      right: 2px;
+      top: 50%;
+      width: 15px;
+      height: 2px;
+      margin-top: -1px;
+      border-radius: 2px;
+      background: #8a6853;
+    }
+    .faq-list summary::after { transform: rotate(90deg); }
+    .faq-list details[open]:not(.is-closing) > summary::after { transform: rotate(0); }
+    .faq-list details[open]:not(.is-closing) { border-color: #c4a697; }
+    .faq-answer { overflow: hidden; }
+    .faq-list details p{font-size:.91rem;color:var(--muted);padding-bottom:22px;margin:0}
     /* LOCALIZAÇÃO */
     .location-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px;align-items:center}.location-list{display:grid;gap:18px;margin:28px 0 32px}.location-item{display:flex;gap:15px;align-items:flex-start}.location-item .symbol{display:grid;place-items:center;width:38px;height:38px;background:var(--rose-light);border-radius:11px;flex:none;color:#715044}.location-item strong{display:block}.location-item span,.location-item a{color:var(--muted);font-size:.92rem}.location-item a:hover{text-decoration:underline}.map-frame{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);background:#e9dbd5;min-height:400px}.map-frame iframe{display:block;border:0;width:100%;height:410px}
     /* CTA / FOOTER */
     .closing{background:linear-gradient(115deg,#EEDBD5,#F9F2ED);text-align:center;padding:95px 20px}.closing h2{max-width:750px;margin:0 auto 22px}.closing p{max-width:520px;margin:0 auto 29px;color:var(--muted)}.site-footer{background:#302827;color:#f5ece7;padding:62px 0 25px}.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px}.site-footer .brand-symbol{color:#e1c5b2;border-color:#ba9d8a}.site-footer .brand-name small{color:#ccbeb6}.footer-note{max-width:340px;font-size:.89rem;color:#d4c7c0;margin-top:22px}.site-footer h3{font:700 .83rem 'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.1em;margin:5px 0 21px}.footer-links{display:grid;gap:10px}.site-footer a,.site-footer p{color:#ddd1c9;font-size:.88rem}.site-footer a:hover{color:#fff;text-decoration:underline}.footer-bottom{border-top:1px solid #5b4a46;margin-top:55px;padding-top:22px;color:#c2b2ab;font-size:.76rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .whatsapp-float{position:fixed;right:23px;bottom:24px;z-index:90;width:61px;height:61px;display:grid;place-items:center;border-radius:50%;background:#207E4F;color:#fff;box-shadow:0 9px 25px #0004;transition:transform .2s}.whatsapp-float:hover{transform:scale(1.08);background:#17663f}.whatsapp-float svg{width:31px;height:31px;fill:currentColor}
-    /* Animação discreta, respeitando preferência do usuário */
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.visible{opacity:1;transform:none}
+    .menu-icon, .menu-icon::before, .menu-icon::after {
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+    .menu-icon { position: relative; }
+    .menu-icon::before, .menu-icon::after { content: ""; position: absolute; inset: 0; }
+    .menu-icon::before { transform: translateY(-6px); }
+    .menu-icon::after { transform: translateY(6px); }
+    .menu-toggle[aria-expanded="true"] .menu-icon { background: transparent; }
+    .menu-toggle[aria-expanded="true"] .menu-icon::before { transform: rotate(45deg); }
+    .menu-toggle[aria-expanded="true"] .menu-icon::after { transform: rotate(-45deg); }
+    #booking input:focus-visible {
+      border-color: #8a6853;
+      outline: 2px solid #9a663a;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 5px #b18c5c20;
+    }
+
+    @media screen and (prefers-reduced-motion: no-preference) {
+      @keyframes section-enter {
+        from { opacity: 0; translate: 0 14px; }
+        to { opacity: 1; translate: 0 0; }
+      }
+      .motion-ready .reveal:not(.visible):not(:focus-within) { opacity: 0; }
+      .motion-ready .reveal.visible {
+        animation: section-enter 520ms var(--motion-ease) var(--enter-delay, 0ms) backwards;
+      }
+      .motion-ready .reveal:focus-within { opacity: 1 !important; translate: none !important; }
+      .hero-art, .about-copy, .map-frame, .space-column:nth-child(2),
+      :is(.card-grid, .review-grid, .benefit-grid, .footer-grid) > :nth-child(3n+2) { --enter-delay: 55ms; }
+      :is(.card-grid, .review-grid, .benefit-grid, .footer-grid) > :nth-child(3n) { --enter-delay: 100ms; }
+      .motion-ready :is(.hero-art, .about-photo-wrap).visible :is(.art-caption, .floating-note) {
+        animation: section-enter 460ms var(--motion-ease) 130ms backwards;
+      }
+      .menu-icon { transition: background-color 160ms ease; }
+      .menu-icon::before, .menu-icon::after, .faq-list summary::after {
+        transition: transform 260ms var(--motion-ease);
+      }
+      .faq-list details, .review-card, #galeria .gallery-placeholder, #booking input {
+        transition: border-color 200ms ease, box-shadow 220ms ease;
+      }
+      .results-controls button, .menu-toggle, .btn, .whatsapp-float {
+        transition: transform 180ms var(--motion-ease), background-color 180ms ease, box-shadow 180ms ease;
+      }
+      :is(.btn, .menu-toggle, .results-controls button, .whatsapp-float):active { transform: scale(.98); }
+      .nav-links a, .footer-links a { transition: color 180ms ease; }
+      :is(.btn, .text-link) > span[aria-hidden] { transition: transform 180ms var(--motion-ease); }
+    }
+    @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+      :is(.btn, .text-link):is(:hover, :focus-visible) > span[aria-hidden] { transform: translate(2px, -2px); }
+      #galeria .gallery-placeholder:hover { box-shadow: 0 6px 22px #61483720; }
+      .review-card:hover { border-color: #90766e; }
+      .results-controls button:hover { background: var(--cream); }
+    }
+    @media (min-width: 761px) and (prefers-reduced-motion: no-preference) {
+      .nav-links a:not(.btn) { position: relative; }
+      .nav-links a:not(.btn)::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 -4px;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 200ms var(--motion-ease);
+      }
+      .nav-links a:is(:hover, :focus-visible)::after { transform: scaleX(1); }
+    }
     @media(max-width:1050px){.nav-links{gap:13px}.nav-links a{font-size:.77rem}.header-btn{display:none}.benefit-grid{grid-template-columns:repeat(3,1fr)}.hero-grid{gap:15px}.art-caption{left:-14px}}
-    @media(max-width:760px){html{scroll-padding-top:75px}.container{width:min(calc(100% - 34px),var(--wrap))}.nav{min-height:72px}.brand-name{font-size:1.11rem}.brand-symbol{width:38px;height:38px}.menu-toggle{display:flex}.nav-links{display:none;position:absolute;top:72px;left:0;right:0;background:#faf5f1;padding:20px 22px 26px;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line);box-shadow:0 16px 28px #00000014}.nav-links.open{display:flex}.nav-links a{font-size:1rem;padding:12px 6px}.nav-links .mobile-book{display:inline-flex!important;margin-top:11px}.hero-grid,.about-grid,.faq-layout,.location-grid{grid-template-columns:1fr}.hero-grid{padding:75px 0 60px;min-height:0}.hero h1{font-size:clamp(2.9rem,10vw,4.5rem)}.hero-art{min-height:340px}.art-ring{width:min(100%,330px)}.art-inner .monogram-logo{width:96px;height:96px}.art-caption{bottom:8px;left:-10px}.about-grid{gap:55px}.photo-placeholder{min-height:400px}.floating-note{right:0;bottom:15px}.card-grid,.review-grid{grid-template-columns:1fr 1fr}.benefit-grid{grid-template-columns:1fr 1fr;gap:6px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,180px)}.gallery-placeholder:first-child{grid-row:span 2}.gallery-grid .gallery-placeholder:last-child{grid-column:1/-1}.faq-layout,.location-grid{gap:32px}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}.footer-grid>div:first-child{grid-column:span 2}.section{padding:75px 0}.section-head{margin-bottom:32px}}
+    @media(max-width:760px){html{scroll-padding-top:75px}.container{width:min(calc(100% - 34px),var(--wrap))}.nav{min-height:72px}.brand-name{font-size:1.11rem}.brand-symbol{width:38px;height:38px}.menu-toggle{display:flex}.nav-links{visibility:hidden;pointer-events:none;max-height:calc(100vh - 72px);overflow-y:auto;position:absolute;top:72px;left:0;right:0;background:#faf5f1;padding:20px 22px 26px;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid var(--line);box-shadow:0 16px 28px #00000014}.nav-links.open{visibility:visible;pointer-events:auto}.nav-links a{font-size:1rem;padding:12px 6px}.nav-links .mobile-book{display:inline-flex!important;margin-top:11px}.hero-grid,.about-grid,.faq-layout,.location-grid{grid-template-columns:1fr}.hero-grid{padding:75px 0 60px;min-height:0}.hero h1{font-size:clamp(2.9rem,10vw,4.5rem)}.hero-art{min-height:340px}.art-ring{width:min(100%,330px)}.art-inner .monogram-logo{width:96px;height:96px}.art-caption{bottom:8px;left:-10px}.about-grid{gap:55px}.photo-placeholder{min-height:400px}.floating-note{right:0;bottom:15px}.card-grid,.review-grid{grid-template-columns:1fr 1fr}.benefit-grid{grid-template-columns:1fr 1fr;gap:6px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,180px)}.gallery-placeholder:first-child{grid-row:span 2}.gallery-grid .gallery-placeholder:last-child{grid-column:1/-1}.faq-layout,.location-grid{gap:32px}.footer-grid{grid-template-columns:1fr 1fr;gap:32px}.footer-grid>div:first-child{grid-column:span 2}.section{padding:75px 0}.section-head{margin-bottom:32px}}
     @media(max-width:520px){.hero-actions .btn{width:100%}.hero-art{min-height:360px}.art-ring{width:min(100%,310px)}.card-grid,.review-grid{grid-template-columns:1fr}.treatment-card{min-height:0}.benefit-grid{grid-template-columns:1fr 1fr}.benefit{padding:10px 1px}.benefit h3{font-size:1.08rem}.gallery-grid{gap:9px;grid-template-rows:repeat(5,140px)}.gallery-placeholder{font-size:.9rem;padding:10px}.review-card{padding:26px}.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}.whatsapp-float{right:17px;bottom:17px;width:55px;height:55px}.art-caption{padding:14px 16px;max-width:170px;font-size:1rem}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+    @media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+      .nav-links {
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 200ms ease, transform 220ms var(--motion-ease), visibility 0s linear 220ms;
+      }
+      .nav-links.open { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      :is(.btn, .treatment-card, .whatsapp-float):hover { transform: none; }
+    }
   .brand-mark{object-fit:contain;filter:brightness(0) opacity(.75)}.site-footer .brand-mark{filter:brightness(0) invert(1)}
     #booking{max-width:28rem;margin:auto;display:grid;gap:1rem;text-align:left}#booking label{display:grid;gap:.4rem;font-weight:600}#booking input{width:100%;padding:.85rem;border:1px solid #987f74;border-radius:.5rem;font:inherit;background:white;color:#302827}#booking small{text-align:center}
   .gallery-placeholder{position:relative;overflow:hidden}.gallery-placeholder img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -176,12 +272,12 @@
   <header class="site-header">
     <nav class="nav container" aria-label="Navegação principal">
       <a class="brand" href="#inicio" aria-label="Fabíola Donza Estética Avançada, início"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="nav-links" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span></button>
       <div id="nav-links" class="nav-links">
         <a href="#sobre">A clínica</a><a href="#galeria">O espaço</a><a href="#tratamentos">Tratamentos</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
         <a class="btn btn-gold mobile-book" href="#agendar" style="display:none">Agendar avaliação</a>
       </div>
       <a class="btn btn-gold header-btn" href="#agendar">Agendar avaliação <span aria-hidden="true">↗</span></a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="nav-links" aria-expanded="false">☰</button>
     </nav>
   </header>
   <main id="conteudo">
@@ -209,32 +305,32 @@
         <div class="about-copy reveal"><p class="eyebrow">Sobre nós</p><h2 id="sobre-title">O cuidado começa com a forma como você é recebida.</h2><p>Na <strong>Fabíola Donza Estética Avançada</strong>, acreditamos que cuidar da beleza é também reservar tempo para si. Cada visita deve ser uma experiência acolhedora, com escuta atenta e respeito à individualidade de cada pessoa.</p><p>Em Ananindeua, nosso propósito é unir atenção aos detalhes, conforto e uma abordagem responsável da estética facial e corporal, sempre considerando as necessidades e expectativas de quem nos procura.</p><p>A Fabíola dá nome a esse espaço de cuidado e proximidade. Conheça nossa proposta e converse com a equipe para saber quais atendimentos podem fazer sentido para você.</p><a class="btn btn-outline js-whatsapp" href="#agendar">Converse com a equipe <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>
-    <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid reveal">
+    <section class="section" id="galeria" aria-labelledby="galeria-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nosso espaço</p><h2 id="galeria-title">Um lugar para chamar de seu.</h2><p>Conheça os ambientes, os detalhes e a atmosfera da clínica.</p></div><div class="gallery-grid">
       <div class="space-column">
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_8.png" alt="Ambiente da clínica Fabíola Donza" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_8.png" alt="Ambiente da clínica Fabíola Donza" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_1.png" alt="Espaço da clínica Fabíola Donza — foto 1" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><video class="gallery-tour" src="images/V%C3%ADdeo_1.mp4" poster="images/Consultório.png" aria-label="Tour pelos ambientes da clínica" autoplay muted loop playsinline preload="metadata" onplaying="this.controls=false" onpause="this.controls=true"></video></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_6.png" alt="Espaço da clínica Fabíola Donza — foto 6" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/patroa_2.png" alt="Fabíola Donza" loading="lazy" decoding="async"></div>
       </div>
       <div class="space-column">
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
-        <div class="gallery-placeholder"><img src="images/atendimento_espa%C3%A7o_9.png" style="object-position: 50% 65%" alt="Atendimento na clínica Fabíola Donza" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_3.png" alt="Espaço da clínica Fabíola Donza — foto 3" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_2.png" alt="Espaço da clínica Fabíola Donza — foto 2" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_4.png" alt="Espaço da clínica Fabíola Donza — foto 4" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/espa%C3%A7o_7.png" alt="Espaço da clínica Fabíola Donza — foto 7" loading="lazy" decoding="async"></div>
+        <div class="gallery-placeholder reveal"><img src="images/atendimento_espa%C3%A7o_9.png" style="object-position: 50% 65%" alt="Atendimento na clínica Fabíola Donza" loading="lazy" decoding="async"></div>
       </div>
     </div></div></section>
     <section class="section treatments" id="tratamentos" aria-labelledby="tratamentos-title">
       <div class="container"><div class="section-head reveal"><p class="eyebrow">Cuidados personalizados</p><h2 id="tratamentos-title">Tratamentos para cada momento de você.</h2><p>Explore opções faciais e corporais. A indicação depende de avaliação individual, disponibilidade e habilitação profissional.</p></div>
-        <div class="category-head"><h3>Estética facial</h3></div>
+        <div class="category-head reveal"><h3>Estética facial</h3></div>
         <!-- PROCEDIMENTOS SUGERIDOS: CONFIRMAR QUAIS SÃO REALMENTE OFERECIDOS ANTES DE PUBLICAR. -->
         <div class="card-grid">
           <article class="treatment-card reveal"><div class="card-icon" aria-hidden="true">✧</div><h4>Limpeza de pele</h4><p>Uma proposta de cuidado para higiene, conforto e manutenção da pele, conforme avaliação individual.</p><a class="text-link js-treatment" data-treatment="Limpeza de pele" href="#agendar">Quero saber mais <span aria-hidden="true">↗</span></a></article>
           <article class="treatment-card reveal"><div class="card-icon" aria-hidden="true">❋</div><h4>Hidratação facial</h4><p>Protocolos voltados ao cuidado e à sensação de maciez e viço da pele.</p><a class="text-link js-treatment" data-treatment="Hidratação facial" href="#agendar">Quero saber mais <span aria-hidden="true">↗</span></a></article>
           <article class="treatment-card reveal"><div class="card-icon" aria-hidden="true">◈</div><h4>Revitalização facial</h4><p>Opções estéticas para quem deseja dedicar atenção especial à aparência e ao bem-estar da pele.</p><a class="text-link js-treatment" data-treatment="Revitalização facial" href="#agendar">Quero saber mais <span aria-hidden="true">↗</span></a></article>
         </div>
-        <div class="category-head"><h3>Estética corporal</h3></div>
+        <div class="category-head reveal"><h3>Estética corporal</h3></div>
         <div class="card-grid">
           <article class="treatment-card reveal"><div class="card-icon" aria-hidden="true">✳</div><h4>Drenagem linfática estética</h4><p>Técnica manual cuja adequação é considerada de acordo com a avaliação e possíveis contraindicações.</p><a class="text-link js-treatment" data-treatment="Drenagem linfática estética" href="#agendar">Quero saber mais <span aria-hidden="true">↗</span></a></article>
           <article class="treatment-card reveal"><div class="card-icon" aria-hidden="true">◇</div><h4>Massagem relaxante</h4><p>Um momento de pausa e cuidado corporal, com foco em conforto e relaxamento.</p><a class="text-link js-treatment" data-treatment="Massagem relaxante" href="#agendar">Quero saber mais <span aria-hidden="true">↗</span></a></article>
@@ -248,7 +344,7 @@
           <h2 id="resultados-title">Nossos resultados</h2>
           <p>Quer conhecer resultados de um tratamento específico? Converse com a equipe da clínica.</p>
         </div>
-        <div class="results-window">
+        <div class="results-window reveal">
           <div class="results-track">
             <div class="results-group">
               <div class="gallery-placeholder"><video src="images/Resultado_1.MOV" aria-label="Resultado 1 da clínica" controls muted playsinline preload="metadata"></video></div>
@@ -290,15 +386,15 @@
     </div><p class="review-more">★★★★★ &nbsp; 5,0 no Google · 54 avaliações &nbsp; | &nbsp; “Ótimo espaço e muita gentileza no atendimento”.</p></div></section>
     
     
-    <section class="section faq" id="duvidas" aria-labelledby="duvidas-title"><div class="container faq-layout"><div class="reveal"><p class="eyebrow">Perguntas frequentes</p><h2 id="duvidas-title">Tudo começa com uma boa conversa.</h2><p class="lead">Tire dúvidas sobre a experiência na clínica e fale com a equipe para informações específicas sobre cada procedimento.</p><a class="btn btn-outline js-whatsapp" href="#agendar">Falar no WhatsApp <span aria-hidden="true">↗</span></a></div><div class="faq-list reveal">
-      <details><summary>Preciso fazer uma avaliação antes do tratamento?</summary><p>A avaliação ajuda a compreender suas expectativas e verificar quais opções podem ser adequadas. Consulte a equipe sobre o formato da avaliação para o procedimento desejado.</p></details>
-      <details><summary>Quais tratamentos faciais e corporais estão disponíveis?</summary><p>A disponibilidade pode variar. Entre em contato pelo WhatsApp para receber a lista atualizada, orientações e informações sobre cada opção.</p></details>
-      <details><summary>Como faço para agendar um horário?</summary><p>Toque em qualquer botão “Agendar avaliação” e envie a mensagem pelo WhatsApp. A equipe poderá informar horários e próximos passos.</p></details>
-      <details><summary>Os procedimentos são indicados para todas as pessoas?</summary><p>Não necessariamente. Cada procedimento possui características, cuidados e possíveis contraindicações; a indicação deve ocorrer após avaliação individual por profissional habilitado.</p></details>
-      <details><summary>Quantas sessões são necessárias?</summary><p>Isso depende do procedimento, dos objetivos e da avaliação individual. A equipe poderá explicar o plano de cuidados, quando aplicável, sem prometer um resultado específico.</p></details>
-      <details><summary>Os procedimentos exigem cuidados antes ou depois?</summary><p>Alguns podem exigir cuidados específicos. Solicite orientações individualizadas à equipe e siga as recomendações do profissional responsável.</p></details>
-      <details><summary>Como posso saber valores e formas de pagamento?</summary><p>Entre em contato para consultar preços, pacotes disponíveis e formas de pagamento. As condições devem ser confirmadas diretamente com a clínica.</p></details>
-      <details><summary>Onde a clínica está localizada?</summary><p>Na Travessa WE Vinte e Seis, 162, bairro Coqueiro, Ananindeua (PA), CEP 67133-090. Confira a localização no mapa abaixo.</p></details>
+    <section class="section faq" id="duvidas" aria-labelledby="duvidas-title"><div class="container faq-layout"><div class="reveal"><p class="eyebrow">Perguntas frequentes</p><h2 id="duvidas-title">Tudo começa com uma boa conversa.</h2><p class="lead">Tire dúvidas sobre a experiência na clínica e fale com a equipe para informações específicas sobre cada procedimento.</p><a class="btn btn-outline js-whatsapp" href="#agendar">Falar no WhatsApp <span aria-hidden="true">↗</span></a></div><div class="faq-list">
+      <details class="reveal"><summary>Preciso fazer uma avaliação antes do tratamento?</summary><div class="faq-answer"><p>A avaliação ajuda a compreender suas expectativas e verificar quais opções podem ser adequadas. Consulte a equipe sobre o formato da avaliação para o procedimento desejado.</p></div></details>
+      <details class="reveal"><summary>Quais tratamentos faciais e corporais estão disponíveis?</summary><div class="faq-answer"><p>A disponibilidade pode variar. Entre em contato pelo WhatsApp para receber a lista atualizada, orientações e informações sobre cada opção.</p></div></details>
+      <details class="reveal"><summary>Como faço para agendar um horário?</summary><div class="faq-answer"><p>Toque em qualquer botão “Agendar avaliação” e envie a mensagem pelo WhatsApp. A equipe poderá informar horários e próximos passos.</p></div></details>
+      <details class="reveal"><summary>Os procedimentos são indicados para todas as pessoas?</summary><div class="faq-answer"><p>Não necessariamente. Cada procedimento possui características, cuidados e possíveis contraindicações; a indicação deve ocorrer após avaliação individual por profissional habilitado.</p></div></details>
+      <details class="reveal"><summary>Quantas sessões são necessárias?</summary><div class="faq-answer"><p>Isso depende do procedimento, dos objetivos e da avaliação individual. A equipe poderá explicar o plano de cuidados, quando aplicável, sem prometer um resultado específico.</p></div></details>
+      <details class="reveal"><summary>Os procedimentos exigem cuidados antes ou depois?</summary><div class="faq-answer"><p>Alguns podem exigir cuidados específicos. Solicite orientações individualizadas à equipe e siga as recomendações do profissional responsável.</p></div></details>
+      <details class="reveal"><summary>Como posso saber valores e formas de pagamento?</summary><div class="faq-answer"><p>Entre em contato para consultar preços, pacotes disponíveis e formas de pagamento. As condições devem ser confirmadas diretamente com a clínica.</p></div></details>
+      <details class="reveal"><summary>Onde a clínica está localizada?</summary><div class="faq-answer"><p>Na Travessa WE Vinte e Seis, 162, bairro Coqueiro, Ananindeua (PA), CEP 67133-090. Confira a localização no mapa abaixo.</p></div></details>
     </div></div></section>
     <section class="section" id="localizacao" aria-labelledby="localizacao-title"><div class="container location-grid"><div class="reveal"><p class="eyebrow">Venha nos conhecer</p><h2 id="localizacao-title">Estamos em Ananindeua, pertinho de você.</h2><div class="location-list"><div class="location-item"><div class="symbol" aria-hidden="true">⌖</div><div><strong>Endereço</strong><span>Tv. WE Vinte e Seis, 162 – Coqueiro<br>Ananindeua – PA · CEP 67133-090</span></div></div><div class="location-item"><div class="symbol" aria-hidden="true">◷</div><div><strong>Dias e horários</strong><span id="hours-text">Consulte a equipe para saber os horários disponíveis.</span></div></div><div class="location-item"><div class="symbol" aria-hidden="true">☎</div><div><strong>Telefone</strong><a href="tel:+5591982546847">(91) 98254-6847</a></div></div></div><a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Tv.%20WE%20Vinte%20e%20Seis%2C%20162%2C%20Coqueiro%2C%20Ananindeua%2C%20PA" target="_blank" rel="noopener noreferrer">Como chegar <span aria-hidden="true">↗</span></a></div><div class="map-frame reveal"><iframe title="Mapa com a localização da Fabíola Donza Estética Avançada em Ananindeua" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Travessa%20WE%20Vinte%20e%20Seis%2C%20162%2C%20Coqueiro%2C%20Ananindeua%2C%20PA%2C%2067133-090&output=embed" allowfullscreen></iframe></div></div></section>
     <section class="closing" id="agendar" aria-labelledby="agendar-title"><div class="container reveal"><p class="eyebrow">O próximo passo é seu</p><h2 id="agendar-title">Reserve um tempo para cuidar de você.</h2><p>Conte quando você pode vir. A equipe confirma o horário pelo WhatsApp.</p>
@@ -309,7 +405,7 @@
   <small>Na próxima tela, toque em enviar para solicitar sua avaliação.</small>
 </form></div></section>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#inicio"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a><p class="footer-note">Cuidado que acolhe, atenção que valoriza. Sua autoestima merece esse momento.</p></div><div><h3>Explore</h3><div class="footer-links"><a href="#sobre">Sobre a clínica</a><a href="#tratamentos">Tratamentos</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Perguntas frequentes</a><a href="#localizacao">Localização</a></div></div><div><h3>Fale conosco</h3><div class="footer-links"><a href="tel:+5591982546847">(91) 98254-6847</a><a class="js-whatsapp" href="#agendar">WhatsApp</a><a href="https://www.instagram.com/fabioladonzaestetica/" data-social-placeholder="true" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=100054481929488&mibextid=ZbWKwL" data-social-placeholder="true" target="_blank" rel="noopener noreferrer">Facebook</a><p>Coqueiro · Ananindeua/PA</p></div></div></div><div class="footer-bottom"><span>© <span id="copyright-year">2026</span> Fabíola Donza Estética Avançada. Todos os direitos reservados.</span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="reveal"><a class="brand" href="#inicio"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a><p class="footer-note">Cuidado que acolhe, atenção que valoriza. Sua autoestima merece esse momento.</p></div><div class="reveal"><h3>Explore</h3><div class="footer-links"><a href="#sobre">Sobre a clínica</a><a href="#tratamentos">Tratamentos</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Perguntas frequentes</a><a href="#localizacao">Localização</a></div></div><div class="reveal"><h3>Fale conosco</h3><div class="footer-links"><a href="tel:+5591982546847">(91) 98254-6847</a><a class="js-whatsapp" href="#agendar">WhatsApp</a><a href="https://www.instagram.com/fabioladonzaestetica/" data-social-placeholder="true" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/profile.php?id=100054481929488&mibextid=ZbWKwL" data-social-placeholder="true" target="_blank" rel="noopener noreferrer">Facebook</a><p>Coqueiro · Ananindeua/PA</p></div></div></div><div class="footer-bottom reveal"><span>© <span id="copyright-year">2026</span> Fabíola Donza Estética Avançada. Todos os direitos reservados.</span></div></div></footer>
   <a class="whatsapp-float js-whatsapp" href="#agendar" aria-label="Agendar avaliação pelo WhatsApp" title="Agendar pelo WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .8A15.15 15.15 0 0 0 3 23.75L.9 31l7.45-1.95A15.18 15.18 0 1 0 16 .8Zm0 27.58a12.3 12.3 0 0 1-6.27-1.72l-.45-.27-4.42 1.16 1.18-4.3-.29-.45A12.36 12.36 0 1 1 16 28.38Zm6.79-9.21c-.37-.19-2.21-1.09-2.55-1.21-.34-.12-.58-.19-.83.19-.24.37-.95 1.21-1.16 1.46-.22.24-.43.28-.8.09a10.17 10.17 0 0 1-3-1.85 11.28 11.28 0 0 1-2.08-2.59c-.22-.38-.02-.58.16-.77.17-.17.37-.43.56-.64.18-.22.24-.37.36-.61.13-.25.07-.47-.03-.65-.09-.19-.83-2-1.14-2.73-.3-.72-.6-.62-.83-.63h-.71c-.24 0-.65.09-.99.47s-1.29 1.26-1.29 3.08 1.32 3.59 1.5 3.84c.19.25 2.58 3.94 6.25 5.53.88.38 1.57.61 2.1.78.88.28 1.68.24 2.31.15.71-.11 2.21-.9 2.52-1.77.31-.88.31-1.63.22-1.78-.09-.15-.34-.24-.71-.43Z"/></svg></a>
   <script>
     /* ===== DADOS EDITÁVEIS DA CLÍNICA =====
@@ -346,33 +442,80 @@
     document.getElementById('hours-text').textContent = CONFIG.horarios;
     document.getElementById('copyright-year').textContent = new Date().getFullYear();
 
-    // Menu mobile acessível, fecha ao clicar em um link ou apertar Escape.
     const menuButton = document.getElementById('menu-toggle');
     const menu = document.getElementById('nav-links');
-    function closeMenu() { menu.classList.remove('open'); menuButton.setAttribute('aria-expanded','false'); menuButton.setAttribute('aria-label','Abrir menu'); menuButton.textContent='☰'; document.body.classList.remove('menu-open'); }
-    menuButton.addEventListener('click', () => {
-      const opened = menu.classList.toggle('open');
-      menuButton.setAttribute('aria-expanded', String(opened));
-      menuButton.setAttribute('aria-label', opened ? 'Fechar menu' : 'Abrir menu');
-      menuButton.textContent = opened ? '×' : '☰';
-      document.body.classList.toggle('menu-open', opened);
+    const mobile = window.matchMedia('(max-width: 760px)');
+    function setMenu(open) {
+      menu.classList.toggle('open', open);
+      menu.toggleAttribute('inert', mobile.matches && !open);
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+      document.body.classList.toggle('menu-open', open);
+    }
+    setMenu(false);
+    menuButton.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu.addEventListener('click', event => { if (event.target.closest('a')) setMenu(false); });
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.classList.contains('open')) {
+        setMenu(false);
+        menuButton.focus();
+      }
     });
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    window.addEventListener('keydown', e => { if(e.key === 'Escape') closeMenu(); });
-    window.addEventListener('resize', () => { if(window.innerWidth > 760) closeMenu(); });
+    mobile.addEventListener('change', () => setMenu(false));
 
-    // Aparecimento suave; conteúdo permanece visível sem IntersectionObserver.
     const tour = document.querySelector('.gallery-tour');
     tour.muted = true;
     tour.play().catch(() => { tour.controls = true; });
 
-    const animated = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-      }), {threshold:.07});
-      animated.forEach(el => observer.observe(el));
-    } else { animated.forEach(el => el.classList.add('visible')); }
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+      document.querySelectorAll('.reveal').forEach(element => observer.observe(element));
+      document.documentElement.classList.add('motion-ready');
+    }
+
+    // Mantenha o <details> aberto até a resposta terminar de recolher.
+    const allowMotion = window.matchMedia('(prefers-reduced-motion: no-preference)');
+    document.querySelectorAll('.faq-list details').forEach(item => {
+      const summary = item.querySelector('summary');
+      const answer = item.querySelector('.faq-answer');
+      let animation = null;
+
+      function finishAnswer() {
+        item.open = !item.classList.contains('is-closing');
+        item.classList.remove('is-closing');
+        animation.onfinish = null;
+        animation.cancel();
+        animation = null;
+      }
+
+      summary.addEventListener('click', event => {
+        if (!allowMotion.matches || !answer.animate) return;
+        event.preventDefault();
+        const closing = item.open && !item.classList.contains('is-closing');
+        item.classList.toggle('is-closing', closing);
+        item.open = true;
+
+        if (animation) {
+          animation.reverse();
+          return;
+        }
+        animation = answer.animate(
+          [{ height: '0px', opacity: 0 }, { height: answer.scrollHeight + 'px', opacity: 1 }],
+          { duration: 320, easing: 'ease-in-out', direction: closing ? 'reverse' : 'normal', fill: 'both' }
+        );
+        animation.onfinish = () => { if (animation?.playState === 'finished') finishAnswer(); };
+      });
+      allowMotion.addEventListener('change', () => {
+        if (!allowMotion.matches && animation) finishAnswer();
+      });
+    });
   </script>
 <script>
 (async () => {
