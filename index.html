@@ -207,11 +207,22 @@
   -webkit-mask-image: linear-gradient(to right, transparent, black var(--fade), black calc(100% - var(--fade)), transparent);
   mask-image: linear-gradient(to right, transparent, black var(--fade), black calc(100% - var(--fade)), transparent);
 }
-.results-group { gap: var(--gap); align-items: center; }
-#resultados .results-group .gallery-placeholder {
-  width: clamp(240px, 30vw, 420px);
-  flex: none;
-  padding: 0;
+#nav-links a[href="#resultados"][aria-current="location"] { color: #805b3e; }
+#nav-links a[href="#resultados"][aria-current="location"]::after { transform: scaleX(1); }
+#resultados { padding-block-start: clamp(38px, 6vh, 82px); }
+#resultados .section-head { margin-bottom: clamp(24px, 3.5vh, 44px); }
+.results-group { gap: var(--gap); align-items: flex-start; }
+.result-card { flex: none; width: calc(2 * var(--half-card)); margin: 0; }
+#resultados .result-card .gallery-placeholder { width: 100%; padding: 0; }
+.result-card figcaption { display: grid; justify-items: center; gap: 3px; padding: 12px 8px 2px; text-align: center; }
+.result-card figcaption strong { color: var(--ink); font: 500 1.32rem/1.25 'Playfair Display', Georgia, serif; }
+.result-card figcaption span { color: var(--muted); font: 400 .875rem/1.4 'DM Sans', Arial, sans-serif; }
+@media (min-width: 761px) {
+  #nav-links { gap: clamp(12px, 1.3vw, 21px); }
+  .results-window { max-width: calc(5.7 * var(--half-card) + 2 * var(--gap)); margin-inline: auto; }
+  @supports (height: 100svh) {
+    .results-window { --half-card: clamp(110px, min(15vw, calc((100svh - 382px) * .28125)), 210px); }
+  }
 }
 #resultados .results-group :is(img, video) {
   position: static;
@@ -240,7 +251,7 @@
   pointer-events: none;
 }
 .results-group [hidden], .results-controls[hidden] { display: none; }
-.results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 16px; }
+.results-controls { display: flex; justify-content: center; gap: 12px; margin-top: 20px; }
 .results-controls button { font: inherit; border: 1px solid currentColor; border-radius: 24px; background: transparent; padding: 10px 18px; color: inherit; cursor: pointer; }
 .results-controls button:disabled { opacity: .45; cursor: default; }
 
@@ -274,7 +285,7 @@
       <a class="brand" href="#inicio" aria-label="Fabíola Donza Estética Avançada, início"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="nav-links" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span></button>
       <div id="nav-links" class="nav-links">
-        <a href="#sobre">A clínica</a><a href="#galeria">O espaço</a><a href="#tratamentos">Tratamentos</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
+        <a href="#sobre">A clínica</a><a href="#galeria">O espaço</a><a href="#tratamentos">Tratamentos</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
         <a class="btn btn-gold mobile-book" href="#agendar" style="display:none">Agendar avaliação</a>
       </div>
       <a class="btn btn-gold header-btn" href="#agendar">Agendar avaliação <span aria-hidden="true">↗</span></a>
@@ -347,20 +358,62 @@
         <div class="results-window reveal">
           <div class="results-track">
             <div class="results-group">
-              <div class="gallery-placeholder"><video src="images/Resultado_1.MOV" aria-label="Resultado 1 da clínica" controls muted playsinline preload="metadata"></video></div>
-              <div class="gallery-placeholder"><img src="images/resultado_2.jpg" alt="Resultado 2 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_3.jpg" alt="Resultado 3 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_4.jpg" alt="Resultado 4 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_5.jpg" alt="Resultado 5 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_6.jpg" alt="Resultado 6 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_7.png" alt="Resultado 7 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_8.png" alt="Resultado 8 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_9.png" alt="Resultado 9 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_10.png" alt="Resultado 10 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_11.png" alt="Resultado 11 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/resultado_12.png" alt="Resultado 12 da clínica" loading="lazy" decoding="async"></div>
-              <div class="gallery-placeholder"><img src="images/labios_1.jpeg" alt="Resultado de lábios 1" loading="lazy"></div>
-              <div class="gallery-placeholder"><img src="images/labios_2.jpeg" alt="Resultado de lábios 2" loading="lazy"></div>
+              <figure class="result-card" data-category="video">
+                <div class="gallery-placeholder"><video src="images/Resultado_1.MOV" aria-label="Vídeo de resultado da clínica" controls muted playsinline preload="metadata"></video></div>
+                <figcaption><strong>Resultado em vídeo</strong><span>Registro da clínica</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="corporal">
+                <div class="gallery-placeholder"><img src="images/resultado_2.jpg" alt="Comparativo de glúteos" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Glúteos</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="corporal">
+                <div class="gallery-placeholder"><img src="images/resultado_3.jpg" alt="Comparativo de glúteos" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Glúteos</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="corporal">
+                <div class="gallery-placeholder"><img src="images/resultado_4.jpg" alt="Comparativo de glúteos" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Glúteos</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="corporal">
+                <div class="gallery-placeholder"><img src="images/resultado_5.jpg" alt="Comparativo de glúteos" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Glúteos</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="corporal">
+                <div class="gallery-placeholder"><img src="images/resultado_6.jpg" alt="Comparativo de glúteos" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Glúteos</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_7.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_8.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_9.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_10.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_11.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="rosto">
+                <div class="gallery-placeholder"><img src="images/resultado_12.png" alt="Comparativo de rosto" loading="lazy" decoding="async"></div>
+                <figcaption><strong>Rosto</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="labios">
+                <div class="gallery-placeholder"><img src="images/labios_1.jpeg" alt="Comparativo de lábios" loading="lazy"></div>
+                <figcaption><strong>Lábios</strong><span>Antes e depois</span></figcaption>
+              </figure>
+              <figure class="result-card" data-category="labios">
+                <div class="gallery-placeholder"><img src="images/labios_2.jpeg" alt="Comparativo de lábios" loading="lazy"></div>
+                <figcaption><strong>Lábios</strong><span>Antes e depois</span></figcaption>
+              </figure>
             </div>
           </div>
         </div>
@@ -519,17 +572,18 @@
   </script>
 <script>
 (async () => {
+  const resultsSection = document.getElementById('resultados');
+  const resultsLink = document.querySelector('#nav-links a[href="#resultados"]');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) resultsLink.setAttribute('aria-current', 'location');
+      else resultsLink.removeAttribute('aria-current');
+    }, { rootMargin: '-12% 0px -35% 0px' }).observe(resultsSection);
+  }
   const viewport = document.querySelector('.results-window');
   const group = viewport.querySelector('.results-group');
   const controls = viewport.nextElementSibling;
   const [previous, next] = controls.querySelectorAll('button');
-  function category(card) {
-    const name = card.firstElementChild.getAttribute('src').split('/').pop().toLowerCase();
-    if (name.startsWith('labios')) return 'labios';
-    if (card.querySelector('video')) return 'video';
-    const number = Number(name.match(/\d+/)?.[0]);
-    return number >= 2 && number <= 6 ? 'corporal' : 'rosto';
-  }
   function shuffle(cards) {
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -538,7 +592,7 @@
     return cards;
   }
   function syncVideo() {
-    const active = group.children[group.children.length > 1 ? 1 : 0];
+    const active = group.children[1] || group.firstElementChild;
     for (const video of group.querySelectorAll('video')) {
       if (active?.contains(video) && !document.hidden && inView) {
         video.muted = true;
@@ -552,47 +606,46 @@
     syncVideo();
   }).observe(viewport);
   document.addEventListener('visibilitychange', syncVideo);
-  function prepareGallery() {
-    group.querySelectorAll('img').forEach(photo => { photo.loading = 'eager'; });
-    const all = Array.from(group.children);
-    const buckets = ['corporal', 'rosto', 'labios'].map(type => shuffle(all.filter(card => category(card) === type)));
+  function prepareGallery(cards = Array.from(group.children), selected) {
+    const buckets = ['corporal', 'rosto', 'labios', 'geral'].map(type =>
+      shuffle(cards.filter(card => card.dataset.category === type))
+    );
     const ordered = [];
     while (buckets.some(bucket => bucket.length)) {
       for (const bucket of buckets) if (bucket.length) ordered.push(bucket.pop());
     }
-    ordered.splice(3, 0, ...all.filter(card => category(card) === 'video'));
+    if (ordered.length > 1) ordered.push(ordered.shift());
+    ordered.splice(3, 0, ...cards.filter(card => card.dataset.category === 'video'));
+    const selectedIndex = ordered.indexOf(selected);
+    if (selectedIndex > 0) ordered.push(...ordered.splice(0, selectedIndex));
     group.replaceChildren(...ordered);
+    group.querySelectorAll('img').forEach(photo => { photo.loading = 'eager'; });
     const hasNeighbor = group.children.length > 1;
     if (hasNeighbor) group.prepend(group.lastElementChild);
     viewport.classList.toggle('has-neighbor', hasNeighbor);
     controls.hidden = !hasNeighbor;
     syncVideo();
   }
-  const moves = [];
-  let sliding = false;
-  async function move(direction) {
-    if (group.children.length < 2) return;
-    moves.push(direction);
-    if (sliding) return;
-    sliding = true;
-    while (moves.length) {
-      const forward = moves.shift() > 0;
+  // As transições e a atualização da lista de arquivos usam a mesma fila.
+  let galleryUpdate = Promise.resolve();
+  function move(direction) {
+    galleryUpdate = galleryUpdate.then(async () => {
+      if (group.children.length < 2) return;
+      const forward = direction > 0;
       const first = group.firstElementChild;
       const step = group.children[1].offsetLeft - first.offsetLeft;
       if (!forward) group.prepend(group.lastElementChild);
       if (group.animate && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const positions = [0, -step];
-        if (!forward) positions.reverse();
+        const positions = forward ? [0, -step] : [-step, 0];
         const animation = group.animate(
           positions.map(x => ({ transform: 'translateX(' + x + 'px)' })),
           { duration: 380, easing: 'cubic-bezier(.25,.8,.25,1)' }
         );
         await animation.finished.catch(() => {});
       }
-      if (forward && first.parentNode === group) group.append(first);
-    }
-    sliding = false;
-    syncVideo();
+      if (forward) group.append(first);
+      syncVideo();
+    });
   }
   previous.addEventListener('click', () => move(-1));
   next.addEventListener('click', () => move(1));
@@ -611,7 +664,7 @@
     if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) move(dx < 0 ? 1 : -1);
   });
   prepareGallery();
-  // Discover the numbered photos, including uploads with gaps in the numbering.
+  // Inclui novos arquivos numerados mesmo quando há intervalos na numeração.
   const treeUrl = 'https://api.github.com/repos/lobatex-luc/fabioladonza/git/trees/';
   async function readTree(ref) {
     const response = await fetch(treeUrl + ref, { signal: AbortSignal.timeout(8000) });
@@ -622,35 +675,71 @@
     const root = await readTree('main');
     const folder = root.find(entry => entry.type === 'tree' && entry.path === 'images');
     const entries = await readTree(folder.sha);
-    const pattern = /^(?:resultado|labios)[_-](\d+)\.(?:jpe?g|png|webp|avif|mov|mp4)$/i;
-    const photos = entries.filter(entry => entry.type === 'blob' && pattern.test(entry.path))
-      .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', {numeric: true}));
-    const existing = new Set(Array.from(group.children, card => card.firstElementChild.getAttribute("src")));
-    if (photos.length && (photos.length !== existing.size || photos.some(({path}) => !existing.has("images/" + encodeURIComponent(path))))) {
-      const template = group.firstElementChild;
-      const cards = photos.map(({path}) => {
-        const card = template.cloneNode(false);
-        const isVideo = /\.(mov|mp4)$/i.test(path);
-        const photo = document.createElement(isVideo ? 'video' : 'img');
-        const label = 'Resultado ' + path.match(pattern)[1] + ' da clínica';
-        if (isVideo) {
-          photo.setAttribute('aria-label', label);
-          photo.controls = true;
-          photo.muted = true;
-          photo.playsInline = true;
-          photo.preload = 'metadata';
-        } else photo.alt = label;
-        photo.loading = 'lazy';
-        photo.decoding = 'async';
-        photo.src = 'images/' + encodeURIComponent(path);
-        card.append(photo);
-        return card;
-      });
-      group.replaceChildren(...cards);
-      prepareGallery();
+    const pattern = /^(resultado|labios|rosto|gluteos)[_-](\d+)\.(jpe?g|png|webp|avif|mov|mp4)$/;
+    const normalize = name => name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const files = [];
+    for (const entry of entries) {
+      if (entry.type !== 'blob') continue;
+      const match = normalize(entry.path).match(pattern);
+      if (match) files.push({ path: entry.path, prefix: match[1], number: match[2], extension: match[3] });
     }
+    if (!files.length) return;
+    files.sort((a, b) => a.path.localeCompare(b.path, 'pt-BR', { numeric: true }));
+
+    const bySrc = new Map();
+    const byName = new Map();
+    for (const card of group.children) {
+      const src = card.querySelector('img, video').getAttribute('src');
+      const name = decodeURIComponent(src.split('/').pop());
+      bySrc.set(src, card);
+      byName.set(normalize(name).replace(/\.[^.]+$/, '').replace('-', '_'), card);
+    }
+    const srcFor = path => 'images/' + encodeURIComponent(path);
+    if (files.length === bySrc.size && files.every(file => bySrc.has(srcFor(file.path)))) return;
+
+    const areas = { labios: 'Lábios', rosto: 'Rosto', gluteos: 'Glúteos' };
+    const cards = files.map(({ path, prefix, number, extension }) => {
+      const src = srcFor(path);
+      if (bySrc.has(src)) return bySrc.get(src);
+      const video = extension === 'mov' || extension === 'mp4';
+      const tag = video ? 'video' : 'img';
+      const authored = byName.get(prefix + '_' + number);
+      // Conserva a legenda editada pela clínica se mudar a extensão do mesmo resultado.
+      if (authored?.querySelector(tag)) {
+        const copy = authored.cloneNode(true);
+        copy.querySelector(tag).setAttribute('src', src);
+        return copy;
+      }
+      const card = document.createElement('figure');
+      card.className = 'result-card';
+      const area = areas[prefix];
+      if (video) card.dataset.category = 'video';
+      else if (prefix === 'gluteos') card.dataset.category = 'corporal';
+      else card.dataset.category = area ? prefix : 'geral';
+      card.innerHTML = '<div class="gallery-placeholder"></div><figcaption><strong></strong><span></span></figcaption>';
+      const label = video ? 'Resultado em vídeo' : area || 'Resultado ' + number;
+      card.querySelector('strong').textContent = label;
+      card.querySelector('figcaption span').textContent = area && !video ? 'Antes e depois' : 'Registro da clínica';
+      const media = document.createElement(tag);
+      if (video) {
+        media.setAttribute('aria-label', 'Vídeo de resultado da clínica');
+        media.controls = true;
+        media.muted = true;
+        media.playsInline = true;
+        media.preload = 'metadata';
+      } else {
+        media.alt = area ? 'Comparativo de ' + area.toLowerCase() : label + ' da clínica';
+        media.loading = 'lazy';
+        media.decoding = 'async';
+      }
+      media.src = src;
+      card.querySelector('.gallery-placeholder').append(media);
+      return card;
+    });
+    galleryUpdate = galleryUpdate.then(() => prepareGallery(cards, group.children[1] || group.firstElementChild));
+    await galleryUpdate;
   } catch {
-    // Keep the original gallery when GitHub is unavailable.
+    // Se a lista estiver indisponível, a página já contém os comparativos e suas legendas.
   }
 })();
 </script>
