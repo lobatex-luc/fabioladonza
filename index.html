@@ -197,7 +197,8 @@
       .photo-placeholder .about-photo { position:absolute; inset:2.5%; width:95%; height:95%; object-fit:cover; object-position:center; border-radius:inherit; }
       .photo-placeholder .about-monogram { position: absolute; left: 16px; bottom: 16px; z-index: 2; width: 150px; max-width: 40%; height: auto; box-sizing: border-box; border-radius: 50%; background: transparent; filter: brightness(0) invert(1) drop-shadow(0 1px 2px #30231f) drop-shadow(0 0 1px #30231f); }
       .gallery-tour { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  </style>
+  #mentoria{background:var(--cream)}.mentoria-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1fr);gap:clamp(30px,7vw,90px);align-items:center}.mentoria-fotos{position:relative;padding:0 9% 6% 0}.mentoria-retrato{width:100%;height:auto;border-radius:var(--radius)}.mentoria-material{position:absolute;bottom:0;right:0;width:32%;height:auto;border:4px solid var(--cream);border-radius:12px}.mentoria-grid .btn{margin-top:12px}@media(max-width:760px){.mentoria-grid{grid-template-columns:1fr}.mentoria-fotos{max-width:420px}}
+</style>
   <!-- SEO LOCAL: confirmar horário, canais e URL antes de publicar. -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BeautySalon","name":"Fabíola Donza Estética Avançada","description":"Clínica de estética avançada com atendimentos faciais e corporais em Ananindeua, PA.","telephone":"+55 91 98254-6847","address":{"@type":"PostalAddress","streetAddress":"Travessa WE Vinte e Seis, 162","addressLocality":"Ananindeua","addressRegion":"PA","postalCode":"67133-090","addressCountry":"BR"},"areaServed":"Ananindeua, PA","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"54","bestRating":"5"}}
@@ -292,7 +293,7 @@
       <a class="brand" href="#inicio" aria-label="Fabíola Donza Estética Avançada, início"><img class="brand-mark" src="images/Monograma.png" alt="" width="42" height="42"><span class="brand-name">Fabíola Donza<small>Estética Avançada</small></span></a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="nav-links" aria-expanded="false"><span class="menu-icon" aria-hidden="true"></span></button>
       <div id="nav-links" class="nav-links">
-        <a href="#sobre">A clínica</a><a href="#galeria">O espaço</a><a href="#tratamentos">Tratamentos</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
+        <a href="#sobre">A clínica</a><a href="#galeria">O espaço</a><a href="#tratamentos">Tratamentos</a><a href="#resultados">Resultados</a> <a href="#mentoria">Mentoria</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#duvidas">Dúvidas</a><a href="#localizacao">Contato</a>
         <a class="btn btn-gold mobile-book" href="#agendar" style="display:none">Agendar avaliação</a>
       </div>
       <a class="btn btn-gold header-btn" href="#agendar">Agendar avaliação <span aria-hidden="true">↗</span></a>
@@ -432,6 +433,19 @@
       </div>
     </section>
 
+    <section class="section" id="mentoria" aria-labelledby="mentoria-title">
+      <div class="container mentoria-grid">
+        <div class="mentoria-fotos">
+          <img class="mentoria-retrato" src="images/mentoria-retrato.webp" width="640" height="641" loading="lazy" alt="Fabíola Donza">
+          <img class="mentoria-material" src="images/mentoria-material.webp" width="333" height="296" loading="lazy" alt="Caderno da mentoria com a inscrição Método Face Sculpt">
+        </div>
+        <div><h2 id="mentoria-title">Mentoria com Fabíola Donza</h2>
+          <p class="lead">Para profissionais recém-formados ou que estão ingressando na estética e querem conhecer o dia a dia da profissão com Fabíola Donza.</p>
+          <p>Os encontros são presenciais, individuais ou em grupo. Converse com a equipe sobre a duração e como participar.</p>
+          <a class="btn btn-gold" href="https://wa.me/5591982546847?text=Ol%C3%A1%21%20Tenho%20interesse%20na%20mentoria%20com%20Fab%C3%ADola%20Donza.%20Como%20posso%20participar%3F" target="_blank" rel="noopener noreferrer">Tenho interesse na mentoria <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
     <section class="section" id="diferenciais" aria-labelledby="diferenciais-title"><div class="container"><div class="section-head reveal"><p class="eyebrow">Nossa essência</p><h2 id="diferenciais-title">Detalhes que fazem você se sentir bem.</h2><p>Valores que orientam a experiência que queremos proporcionar a cada visita.</p></div><div class="benefit-grid">
       <div class="benefit reveal"><div class="benefit-icon" aria-hidden="true">♡</div><h3>Acolhimento</h3><p>Escuta gentil, respeito e atenção do início ao fim.</p></div>
       <div class="benefit reveal"><div class="benefit-icon" aria-hidden="true">⌂</div><h3>Ambiente agradável</h3><p>Um espaço para desacelerar e cuidar de si.</p></div>
